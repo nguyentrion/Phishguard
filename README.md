@@ -1,5 +1,7 @@
 # 🛡️ PhishGuard — Phishing URL Detection System
 
+**Last Updated:** March 07, 2026
+
 PhishGuard is a full-stack Flask web application that detects phishing URLs using a scikit-learn model. It provides an interactive web UI, user authentication, an admin panel, WHOIS enrichment, and persistent scan history.
 
 ---

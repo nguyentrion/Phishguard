@@ -98,10 +98,6 @@ Responses include prediction (0 = legitimate, 1 = phishing), confidence, extract
 
 Demo database (easy note): The built-in SQLite database is for demo and testing only. When you try the live demo (for example on Vercel) the database is temporary and changes will not be saved long-term — this means user accounts, edits, and scan history are shown only as a demonstration. To use the app with persistent storage or to manage users and edits safely, clone this repository and run it locally with a real database, or host a separate database server (Postgres, MySQL, Vercel Postgres, Supabase) and set `DATABASE_URL` or `SQLALCHEMY_DATABASE_URI` before starting the app.
 
-If you want, I can add step-by-step instructions to configure a managed database (Postgres/Supabase) and update the app to use it.
-
-If you want, I can now update `docs/SETUP.md` and `PROJECT_STRUCTURE.md` to match these exact commands and the pinned dependencies in `requirements.txt`.
-
 ### 4. Run the Application
 
 ```bash

